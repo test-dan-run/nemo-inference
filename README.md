@@ -1,4 +1,7 @@
 # NEMO INFERENCE
+
+This repository is an extension of [NVIDIA/NeMo](https://github.com/NVIDIA/NeMo).
+
 `transcribe_speech.py` was edited to include the predicted confidence scores in the output manifest.
 `custom_transcribe_utils.py` is an edited version of the original `transcribe_utils.py` to include the computed confidence scores.
 
