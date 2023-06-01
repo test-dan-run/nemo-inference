@@ -12,6 +12,11 @@ As far as I know and tested, it only works on **NeMo ver. 1.18.0**.
 
 2. Create a directory `models` in the main directory and save the model there.
 
+## Pulling the prebuilt image (development)
+```
+docker pull dleongsh/nemo-asr:1.18.0-inference
+```
+
 ## Building the docker image (development)
 ```bash
 cd nemo-inference
