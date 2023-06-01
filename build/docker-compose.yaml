@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+
+  local:
+    stdin_open: true
+    tty: true
+    image: dleongsh/nemo-asr:1.18.0-inference
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    volumes:
+      - /mnt/d/projects/nemo_inference:/workspace
+      - /mnt/d/datasets/disd/DISD21_AUDIO_22K:/datasets
+      - /mnt/d/pretrained_models:/pretrained_models
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    shm_size: 16gb
+    # command: python3 local_train.py
+
+  tensorboard:
+    stdin_open: true
+    tty: true
+    image: dleongsh/nemo-asr:1.18.0-inference
+    ports:
+      - 6006:6006
+    volumes:
+      - /mnt/c/projects/nemo_inference/nemo_checkpoints:/logs
+    command: >
+      bash -c 'sed -i "s/\"--bind_all\", default=True,/\"--bind_all\",/g" /opt/conda/lib/python3.8/site-packages/tensorboard/plugins/core/core_plugin.py
+      && tensorboard --logdir /logs --host 0.0.0.0 --port 6006'
